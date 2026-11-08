@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة التميز المطور للمقاولات | TMTCO - نظام إدارة العملاء والموردين ومواد البناء</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cairo & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+        }
+        .search-shadow {
+            box-shadow: 0 10px 25px -5px rgba(31, 78, 120, 0.15), 0 8px 10px -6px rgba(31, 78, 120, 0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Top Navigation & Brand Header -->
+    <header class="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 text-white border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Title with Official Website & Logo Integration -->
+                <div class="flex items-center gap-3">
+                    <a href="https://www.tmtcoksa.com/" target="_blank" title="زيارة موقع شركة التميز المطور للمقاولات" class="bg-amber-500 hover:bg-amber-400 text-slate-950 w-11 h-11 rounded-xl flex items-center justify-center font-extrabold shadow-md transition transform hover:scale-105 overflow-hidden">
+                        <img src="https://www.tmtcoksa.com/wp-content/uploads/2023/04/cropped-logo-tmtco-1.png" alt="TMTCO Logo" class="w-9 h-9 object-contain" onerror="this.onerror=null; this.parentNode.innerHTML='<i class=\'fa-solid fa-building-user text-xl\'></i>';">
+                    </a>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-base sm:text-lg font-black tracking-tight leading-none text-white">
+                                شركة التميز المطور للمقاولات
+                            </h1>
+                            <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold px-2 py-0.5 rounded">TMTCO</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-2">
+                            <span>Al-Tamyooz Al-Motawer Contracting Co.</span>
+                            <a href="https://www.tmtcoksa.com/" target="_blank" class="text-amber-400 hover:underline hidden sm:inline"><i class="fa-solid fa-globe"></i> tmtcoksa.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="hidden md:flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/50 text-xs font-bold">
+                    <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="nav-tab-btn active px-4 py-2 rounded-lg transition flex items-center gap-2 bg-indigo-600 text-white">
+                        <i class="fa-solid fa-chart-pie"></i> لوحة التحليلات
+                    </button>
+                    <button onclick="switchTab('contacts')" id="tab-btn-contacts" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-address-book"></i> قاعدة الجهات الشاملة
+                    </button>
+                    <button onclick="switchTab('materials')" id="tab-btn-materials" class="nav-tab-btn px-4 py-2 rounded-lg text-amber-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2 border border-amber-500/30">
+                        <i class="fa-solid fa-boxes-stacked text-amber-400"></i> سوق المواد (عربي / Eng)
+                    </button>
+                    <a href="/supplier-search/" id="nav-supplier-search" class="nav-tab-btn px-4 py-2 rounded-lg text-emerald-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2 border border-emerald-500/30">
+                        <i class="fa-solid fa-magnifying-glass text-emerald-300"></i> بحث الموردين
+                    </a>
+                    <button onclick="switchTab('jeddah')" id="tab-btn-jeddah" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-amber-400"></i> قطاعات جدة والأحياء
+                    </button>
+                    <button onclick="switchTab('interactions')" id="tab-btn-interactions" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-comments"></i> سجل المتابعات
+                    </button>
+                    <button onclick="switchTab('purchaseorders')" id="tab-btn-purchaseorders" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2 border border-indigo-500/30">
+                        <i class="fa-solid fa-file-invoice-dollar text-indigo-400"></i> طلبات الشراء
+                    </button>
+                    <button onclick="switchTab('procurement')" id="tab-btn-procurement" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2 border border-emerald-500/30">
+                        <i class="fa-solid fa-chart-line text-emerald-400"></i> لوحة المشتريات
+                    </button>
+                    <button onclick="switchTab('contracts')" id="tab-btn-contracts" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2 border border-amber-500/30">
+                        <i class="fa-solid fa-file-contract text-amber-400"></i> العقود
+                    </button>
+                    <button onclick="switchTab('suppliereval')" id="tab-btn-suppliereval" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2 border border-rose-500/30">
+                        <i class="fa-solid fa-star text-rose-400"></i> تقييم الموردين
+                    </button>
+                </nav>
+
+                <!-- Quick Action & User Menu -->
+                <div class="flex items-center gap-2">
+                    <button onclick="openAddModal()" id="btn-add-contact" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md transition flex items-center gap-2 opacity-50 pointer-events-none">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>إضافة جهة جديدة</span>
+                    </button>
+                    <!-- قائمة المستخدم والصلاحيات -->
+                    <div id="user-menu-wrap" class="flex items-center gap-2 hidden">
+                        <button id="btn-user-profile" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md transition flex items-center gap-2" onclick="toggleUserMenu()">
+                            <i class="fa-solid fa-user-circle"></i>
+                            <span id="user-profile-name">مشرف النظام</span>
+                        </button>
+                        <div id="user-menu-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-lg py-2 z-50">
+                            <div class="px-4 py-2 border-b border-slate-100">
+                                <div class="text-xs font-bold text-slate-700" id="user-menu-role">مدير النظام</div>
+                                <div class="text-[10px] text-slate-500 truncate" id="user-menu-username">—</div>
+                            </div>
+                            <button onclick="TMTCO_UI.openUsersModal()" class="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition flex items-center gap-2">
+                                <i class="fa-solid fa-users-gear text-slate-400"></i> إدارة المستخدمين
+                            </button>
+                            <button onclick="TMTCO_UI.openPasswordModal()" class="w-full text-left px-4 py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition flex items-center gap-2">
+                                <i class="fa-solid fa-key text-slate-400"></i> تغيير كلمة المرور
+                            </button>
+                            <button onclick="TMTCO_AUTH.logout(); setTimeout(()=>location.reload(), 800);" class="w-full text-left px-4 py-2 text-xs sm:text-sm text-rose-600 hover:bg-rose-50 transition flex items-center gap-2">
+                                <i class="fa-solid fa-sign-out-alt text-rose-400"></i> تسجيل خروج
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Tabs -->
+        <div class="md:hidden flex overflow-x-auto bg-slate-900 px-4 py-2 gap-2 border-t border-slate-800 text-xs font-bold">
+            <button onclick="switchTab('dashboard')" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white whitespace-nowrap">لوحة التحليلات</button>
+            <button onclick="switchTab('contacts')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">الجهات الشاملة</button>
+            <button onclick="switchTab('materials')" class="px-3 py-1.5 rounded-lg bg-amber-600 text-white whitespace-nowrap">مواد البناء (AR/EN)</button>
+            <a href="/supplier-search/" class="px-3 py-1.5 rounded-lg bg-emerald-800 text-white whitespace-nowrap">بحث الموردين</a>
+            <button onclick="switchTab('jeddah')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">قطاعات جدة</button>
+            <button onclick="switchTab('interactions')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">المتابعات</button>
+            <button onclick="switchTab('purchaseorders')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">طلبات الشراء</button>
+            <button onclick="switchTab('procurement')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">لوحة المشتريات</button>
+            <button onclick="switchTab('contracts')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">العقود</button>
+            <button onclick="switchTab('suppliereval')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">تقييم الموردين</button>
+        </div>
+    </header>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div id="login-screen" class="fixed inset-0 bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-950 z-[100] flex items-center justify-center">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 mx-4">
+            <div class="text-center mb-8">
+                <div class="bg-amber-500 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-building-user text-slate-950 text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 mb-2">تسجيل الدخول</h2>
+                <p class="text-slate-500 text-sm">نظام إدارة العملاء والموردين ومواد البناء — شركة التميز المطور للمقاولات</p>
+            </div>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">اسم المستخدم</label>
+                    <input type="text" id="login-username" required placeholder="اسم المستخدم" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">كلمة المرور</label>
+                    <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                </div>
+                <div id="login-error" class="hidden text-sm text-rose-600 bg-rose-50 border border-rose-200 rounded-lg p-3"></div>
+                <button type="submit" id="login-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-sign-in-alt"></i> دخول
+                </button>
+            </form>
+            <div class="mt-6 text-center text-xs text-slate-500">
+                <p>تُنشأ الحسابات وتُدار مركزيًا بواسطة مدير النظام.</p>
+                <p class="text-[10px] text-slate-400 mt-1">تأكد من اتصالك بخادم النظام عند تعذر تسجيل الدخول.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full space-y-6">
+
+        <!-- ================= TAB 1: DASHBOARD & ANALYTICS ================= -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">إجمالي الجهات المسجلة</span>
+                        <i class="fa-solid fa-users text-indigo-600 bg-indigo-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-total-contacts" class="text-2xl sm:text-3xl font-extrabold text-slate-900">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">سجل متاح بالنظام</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">جهات منطقة جدة</span>
+                        <i class="fa-solid fa-map-pin text-amber-600 bg-amber-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-jeddah-contacts" class="text-2xl sm:text-3xl font-extrabold text-amber-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">موزعة على أحياء جدة</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">المقاولون والعملاء</span>
+                        <i class="fa-solid fa-helmet-safety text-emerald-600 bg-emerald-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-contractors-count" class="text-2xl sm:text-3xl font-extrabold text-emerald-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">عميل ومقاول عام</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">الموردون والمصانع</span>
+                        <i class="fa-solid fa-industry text-blue-600 bg-blue-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-suppliers-count" class="text-2xl sm:text-3xl font-extrabold text-blue-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">مورد ومصنع خرسانة/حديد</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">جاهزية التواصل (WhatsApp)</span>
+                        <i class="fa-brands fa-whatsapp text-emerald-600 bg-emerald-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-wa-percentage" class="text-2xl sm:text-3xl font-extrabold text-slate-900">0%</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">أرقام موثقة</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">متابعات مستحقة هذا الأسبوع</span>
+                        <i class="fa-solid fa-clock text-rose-600 bg-rose-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-pending-followups" class="text-2xl sm:text-3xl font-extrabold text-rose-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">تحتاج لتواصل عاجل</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-chart-bar text-indigo-600"></i> توزيع الجهات حسب النشاط الرئيسي
+                    </h3>
+                    <div id="activity-breakdown-list" class="space-y-3"></div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-map text-amber-500"></i> التوزيع الجغرافي لأحياء جدة
+                    </h3>
+                    <div id="jeddah-districts-list" class="space-y-3"></div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                            <i class="fa-solid fa-shield-heart text-emerald-600"></i> مؤشرات صحة جودة البيانات (Data Health)
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-xs font-bold text-slate-700">سجلات كاملة (واتساب + بريد + موقع)</span>
+                                <span id="health-complete-count" class="text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">0</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-xs font-bold text-slate-700">سجلات بدون بريد إلكتروني</span>
+                                <span id="health-missing-email" class="text-xs font-black text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">0</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-xs font-bold text-slate-700">سجلات بدون هاتف مباشر</span>
+                                <span id="health-missing-phone" class="text-xs font-black text-rose-600 bg-rose-50 px-2.5 py-1 rounded-lg">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+                        <div class="flex items-center gap-2 text-indigo-900 font-bold text-xs mb-1">
+                            <i class="fa-solid fa-lightbulb text-amber-500"></i> توصية التوسع المستهدفة بجدة:
+                        </div>
+                        <p class="text-[11px] text-indigo-700 leading-relaxed">
+                            تُظهر البيانات تركز مصانع الخرسانة وموردي المعدات في <strong>المنطقة الصناعية والخمرة (جنوب جدة)</strong>، بينما يتركز المطورون العقاريون والمقاولون في <strong>الروضة وأبحر (شمال جدة)</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: MAIN DIRECTORY & SMART SEARCH ================= -->
+        <section id="tab-contacts" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white rounded-2xl p-6 shadow-md border border-slate-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-address-book text-amber-400"></i> قاعدة بيانات الجهات الشاملة وسجل الموردين
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">البحث الذكي المباشر بأسماء الأشخاص، الشركات، الأنشطة، أرقام التواصل وأحياء مدينة جدة.</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="bg-slate-800/80 border border-slate-700 text-amber-300 text-xs font-bold px-3 py-1.5 rounded-xl">
+                            <i class="fa-solid fa-filter"></i> تصفية سريعة
+                        </span>
+                        <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold px-3 py-1.5 rounded-xl">
+                            مفعل بالكامل
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+                <div class="relative">
+                    <input type="text" id="smartSearchInput" placeholder="اكتب أول حرف، اسم العميل، اسم الشركة، النشاط، رقم الهاتف، الإيميل، أو اسم الحي بجدة..." class="w-full bg-slate-50 border-2 border-indigo-200 rounded-xl py-3.5 px-4 pr-11 text-slate-900 font-bold placeholder-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white text-sm sm:text-base transition">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-indigo-600">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs font-bold">
+                    <div>
+                        <label class="block text-slate-500 mb-1">نوع الجهة</label>
+                        <select id="filterType" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الأنواع</option>
+                            <option value="عميل">عميل</option>
+                            <option value="مورد">مورد</option>
+                            <option value="مقاول عام">مقاول عام</option>
+                            <option value="مصنع">مصنع</option>
+                            <option value="استشاري">مكتب استشاري</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 mb-1">النشاط الرئيسي</label>
+                        <select id="filterActivity" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الأنشطة</option>
+                            <option value="مقاولات عامة">مقاولات عامة</option>
+                            <option value="مقاولات طرق">مقاولات طرق</option>
+                            <option value="خرسانة جاهزة">خرسانة جاهزة</option>
+                            <option value="مصانع بلوك">مصانع بلوك</option>
+                            <option value="حديد ومواد إنشائية">حديد ومواد إنشائية</option>
+                            <option value="معدات ثقيلة">معدات ثقيلة</option>
+                            <option value="تأجير معدات">تأجير معدات</option>
+                            <option value="نقل وشحن">نقل وشحن</option>
+                            <option value="تشطيبات">تشطيبات</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 mb-1">المدينة</label>
+                        <select id="filterCity" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع المدن</option>
+                            <option value="جدة">جدة</option>
+                            <option value="الرياض">الرياض</option>
+                            <option value="مكة المكرمة">مكة المكرمة</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 mb-1">حالة المتابعة</label>
+                        <select id="filterStatus" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الحالات</option>
+                            <option value="مهتم">مهتم</option>
+                            <option value="طلب عرض سعر">طلب عرض سعر</option>
+                            <option value="تم الاتفاق">تم الاتفاق</option>
+                            <option value="جديد">جديد</option>
+                            <option value="لم يرد">لم يرد</option>
+                        </select>
+                    </div>
+                    <div class="col-span-2 md:col-span-1 flex items-end gap-2">
+                        <button onclick="resetFilters()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold p-2.5 rounded-xl border border-slate-200 transition text-center">إعادة ضبط</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 text-xs font-bold">
+                    <span class="text-slate-400">اختصارات سريعة:</span>
+                    <button onclick="setQuickSearch('جدة')" class="bg-amber-50 text-amber-800 border border-amber-200 px-3 py-1 rounded-lg hover:bg-amber-100 transition">شركات جدة</button>
+                    <button onclick="setQuickSearch('خرسانة')" class="bg-indigo-50 text-indigo-800 border border-indigo-200 px-3 py-1 rounded-lg hover:bg-indigo-100 transition">خرسانة جاهزة</button>
+                    <button onclick="setQuickSearch('حديد')" class="bg-blue-50 text-blue-800 border border-blue-200 px-3 py-1 rounded-lg hover:bg-blue-100 transition">حديد ومعدات</button>
+                    <button onclick="setQuickSearch('الخمرة')" class="bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-lg hover:bg-emerald-100 transition">حي الخمرة</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-4 bg-slate-900 text-white flex items-center justify-between text-xs font-bold">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-amber-400"></i> نتيجة الفلترة المباشرة:
+                        <span id="contacts-found-count" class="bg-amber-500 text-slate-950 px-2 py-0.5 rounded-md font-black">0</span> سجل
+                    </span>
+                    <span class="text-slate-400">انقر على الرقم للمراسلة المباشرة أو الخريطة للموقع</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                <th class="py-3.5 px-3 text-center">#</th>
+                                <th class="py-3.5 px-4">اسم جهة الاتصال والشركة</th>
+                                <th class="py-3.5 px-4">النوع والنشاط الرئيسي</th>
+                                <th class="py-3.5 px-4">المدينة والحي</th>
+                                <th class="py-3.5 px-4 text-center">واتساب</th>
+                                <th class="py-3.5 px-4 text-center">الموقع</th>
+                                <th class="py-3.5 px-4 text-center">Gmail</th>
+                                <th class="py-3.5 px-4 text-center">الحالة</th>
+                                <th class="py-3.5 px-4 text-center">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mainContactsTableBody" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
+                    </table>
+                </div>
+                <div id="noContactsFound" class="hidden p-8 text-center bg-slate-50">
+                    <i class="fa-solid fa-users-slash text-4xl text-slate-300 mb-3"></i>
+                    <p class="font-bold text-slate-700">لم يتم العثور على أي نتائج مطابقة للبحث!</p>
+                    <p class="text-xs text-slate-500 mt-1">جرب تغيير الحرف، أو إعادة ضبط الفلاتر لتغطية المزيد من النتائج.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: MATERIALS ================= -->
+        <section id="tab-materials" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-md">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black text-amber-400 flex items-center gap-2">
+                            <i class="fa-solid fa-truck-ramp-box"></i> محرك بحث مواد وموردين البناء الذكي
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">ابحث بأسماء المواد والعلامات التجارية بالعربي أو الإنجليزي.</p>
+                    </div>
+                    <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold px-3 py-1.5 rounded-xl">
+                        <i class="fa-brands fa-google text-amber-400"></i> مدمج بمحرك بحث Google الحي
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+                <div class="flex gap-2">
+                    <div class="relative flex-1">
+                        <input type="text" id="materialSearchInput" placeholder="ابحث مثل قوقل: أسمنت الصفوة جدة الخمرة، حديد الراجحي 12 مم..." class="w-full bg-slate-50 border-2 border-amber-200 rounded-xl py-3.5 px-4 pr-11 text-slate-900 font-bold placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white text-sm sm:text-base transition">
+                        <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-amber-600">
+                            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                        </div>
+                    </div>
+                    <button onclick="triggerGoogleDeepSearch()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs sm:text-sm px-5 py-3.5 rounded-xl shadow-md transition flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-globe"></i> بحث عميق عبر قوقل
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+                    <span class="text-slate-500">بحث سريع بأسماء المواد:</span>
+                    <button onclick="searchMaterial('أسمنت الصفوة جدة')" class="bg-amber-50 text-amber-900 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-lg transition">أسمنت الصفوة جدة</button>
+                    <button onclick="searchMaterial('حديد الراجحي جدة الخمرة')" class="bg-blue-50 text-blue-900 hover:bg-blue-100 border border-blue-200 px-3 py-1.5 rounded-lg transition">حديد الراجحي الخمرة</button>
+                    <button onclick="searchMaterial('خرسانة جاهزة C35 جدة')" class="bg-emerald-50 text-emerald-900 hover:bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-lg transition">خرسانة جاهزة C35</button>
+                    <button onclick="searchMaterial('Sikaflex waterproofing Jeddah')" class="bg-purple-50 text-purple-900 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-lg transition">مواد عزل سيكا Sikaflex</button>
+                    <button onclick="searchMaterial('تأجير بوكلينات ومعدات جدة')" class="bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300 px-3 py-1.5 rounded-lg transition">معدات وبوكلينات جدة</button>
+                    <button onclick="searchMaterial('')" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-3 py-1.5 rounded-lg transition">عرض الجميع</button>
+                </div>
+            </div>
+
+            <div id="googleSearchLoader" class="hidden bg-white rounded-2xl p-8 border border-amber-200 shadow-sm text-center space-y-3">
+                <div class="inline-block animate-spin text-amber-500 text-3xl"><i class="fa-solid fa-circle-notch"></i></div>
+                <h4 class="font-black text-slate-800 text-sm">جاري البحث المباشر والعميق عبر Google AI في الموردين والمصانع بجدة...</h4>
+                <p class="text-xs text-slate-500">يتم تجميع أسعار وأرقام التواصل الحية وعناوين الأحياء الميدانية.</p>
+            </div>
+
+            <div id="materialsResultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </section>
+
+        <!-- ================= TAB 4: JEDDAH SECTORS ================= -->
+        <section id="tab-jeddah" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 rounded-2xl p-6 text-white shadow-md">
+                <h2 class="text-xl font-black flex items-center gap-2">
+                    <i class="fa-solid fa-map-location-dot"></i> التوزيع القطاعي لمدينة جدة والمناطق الصناعية
+                </h2>
+                <p class="text-xs text-amber-100 mt-1">تقسيم محدد وموزع لأحياء شمال، وسط، جنوب، وشرق جدة لسهولة توجيه فريق المبيعات والميدان.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span> شمال جدة
+                        </h3>
+                        <span id="sector-count-north" class="text-xs font-black bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">أبحر الشمالية والجنوبية، المحمدية، الشاطئ، النزهة، الحمدانية، الصفا، المروة.</p>
+                    <button onclick="filterByJeddahSector('شمال جدة')" class="w-full bg-slate-50 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">عرض شركات شمال جدة</button>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> وسط جدة
+                        </h3>
+                        <span id="sector-count-central" class="text-xs font-black bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">الروضة، الخالدية، الحمراء، العزيزية، الفيصلية، مشرفة، البغدادية، البلد.</p>
+                    <button onclick="filterByJeddahSector('وسط جدة')" class="w-full bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">عرض شركات وسط جدة</button>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> جنوب جدة والمناطق الصناعية
+                        </h3>
+                        <span id="sector-count-south" class="text-xs font-black bg-amber-50 text-amber-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">الخمرة، المدينة الصناعية الأولى والثانية، الوزيرية، المحجر، مدائن الفهد.</p>
+                    <button onclick="filterByJeddahSector('جنوب جدة')" class="w-full bg-slate-50 hover:bg-amber-50 hover:text-amber-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">عرض شركات جنوب جدة والصناعية</button>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-purple-500 inline-block"></span> شرق جدة وذهبان
+                        </h3>
+                        <span id="sector-count-east" class="text-xs font-black bg-purple-50 text-purple-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">السامر، المنار، بريمان، أم السلم، قويزة، الفروسية، وذهبان.</p>
+                    <button onclick="filterByJeddahSector('شرق جدة')" class="w-full bg-slate-50 hover:bg-purple-50 hover:text-purple-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">عرض شركات شرق جدة</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center justify-between">
+                    <span>قائمة جهات الاتصال الخاصة بمدينة جدة</span>
+                    <span class="text-xs font-normal text-slate-500">عرض مصفى لجدة وأحيائها</span>
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-bold">
+                                <th class="py-3 px-3">الاسم والشركة</th>
+                                <th class="py-3 px-3">القطاع والحي</th>
+                                <th class="py-3 px-3">النشاط الرئيسي</th>
+                                <th class="py-3 px-3 text-center">التواصل</th>
+                                <th class="py-3 px-3 text-center">الموقع</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jeddahTableBody" class="divide-y divide-slate-100 font-medium"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: CRM INTERACTIONS ================= -->
+        <section id="tab-interactions" class="tab-content space-y-6 hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <div>
+                    <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-indigo-600"></i> سجل المتابعات والتواصل (CRM Interaction Tracker)
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">تسجيل عمليات الاتصال، طلبات عروض الأسعار، والمواعيد القادمة.</p>
+                </div>
+                <button onclick="openInteractionModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> إضافة سجل تواصل جديد
+                </button>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-900 text-white font-bold">
+                                <th class="py-3.5 px-4">تاريخ التواصل</th>
+                                <th class="py-3.5 px-4">اسم جهة الاتصال والشركة</th>
+                                <th class="py-3.5 px-4">وسيلة التواصل</th>
+                                <th class="py-3.5 px-4">نتيجة التواصل</th>
+                                <th class="py-3.5 px-4">الخطوة التالية</th>
+                                <th class="py-3.5 px-4">تاريخ المتابعة القادمة</th>
+                                <th class="py-3.5 px-4">المسؤول الداخلي</th>
+                            </tr>
+                        </thead>
+                        <tbody id="interactionsTableBody" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 6: PURCHASE ORDERS ================= -->
+        <section id="tab-purchaseorders" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-2xl p-6 shadow-md border border-indigo-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-file-invoice-dollar text-indigo-400"></i> نظام طلبات الشراء والمشتريات
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">إدارة طلبات الشراء من الموردين، تتبع الحالات، مقارنة الأسعار، وتسجيل الاستلامات.</p>
+                    </div>
+                    <button onclick="openPOModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> طلب شراء جديد
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">إجمالي طلبات الشراء</div>
+                    <div class="text-2xl font-extrabold text-indigo-600" id="po-total-count">0</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">قيد الموافقة / التنفيذ</div>
+                    <div class="text-2xl font-extrabold text-amber-600" id="po-pending-count">0</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">تم الاستلام</div>
+                    <div class="text-2xl font-extrabold text-emerald-600" id="po-received-count">0</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">قيمة الطلبات الإجمالية</div>
+                    <div class="text-2xl font-extrabold text-slate-900" id="po-total-value">0 ريال</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-bold">
+                    <div>
+                        <label class="block text-slate-500 mb-1">حالة الطلب</label>
+                        <select id="poFilterStatus" onchange="renderPOTable()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الحالات</option>
+                            <option value="قيد الموافقة">قيد الموافقة</option>
+                            <option value="تم الإرسال">تم الإرسال</option>
+                            <option value="قيد التنفيذ">قيد التنفيذ</option>
+                            <option value="تم الاستلام">تم الاستلام</option>
+                            <option value="ملغي">ملغي</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 mb-1">المورد</label>
+                        <select id="poFilterSupplier" onchange="renderPOTable()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الموردين</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 mb-1">من تاريخ</label>
+                        <input type="date" id="poFilterFrom" onchange="renderPOTable()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 mb-1">إلى تاريخ</label>
+                        <input type="date" id="poFilterTo" onchange="renderPOTable()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-indigo-50 text-indigo-700 font-bold border-b border-indigo-200">
+                                <th class="py-3 px-3 text-center">رقم الطلب</th>
+                                <th class="py-3 px-4">المورد</th>
+                                <th class="py-3 px-4">المادة</th>
+                                <th class="py-3 px-4 text-center">الكمية</th>
+                                <th class="py-3 px-4 text-center">السعر الإجمالي</th>
+                                <th class="py-3 px-4 text-center">تاريخ الطلب</th>
+                                <th class="py-3 px-4 text-center">تاريخ التسليم المتوقع</th>
+                                <th class="py-3 px-4 text-center">الحالة</th>
+                                <th class="py-3 px-4 text-center">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="poTableBody" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="noPOFound" class="hidden p-8 text-center bg-slate-50">
+                <i class="fa-solid fa-inbox text-4xl text-slate-300 mb-3"></i>
+                <p class="font-bold text-slate-700">لا توجد طلبات شراء مطابقة!</p>
+                <p class="text-xs text-slate-500 mt-1">أضف طلب شراء جديد باستخدام الزر أعلاه.</p>
+            </div>
+        </section>
+
+        <!-- ================= TAB 7: PROCUREMENT DASHBOARD ================= -->
+        <section id="tab-procurement" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-emerald-900 via-slate-900 to-emerald-950 text-white rounded-2xl p-6 shadow-md border border-emerald-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-400"></i> لوحة المشتريات والتحليلات
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">مراقبة الإنفاق الشهري، أفضل الموردين، وطلبات الأسعار المعلقة (RFQ).</p>
+                    </div>
+                    <button onclick="refreshProcurementDashboard()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> تحديث
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">الإنفاق الشهري (هذا الشهر)</div>
+                    <div class="text-2xl font-extrabold text-emerald-600" id="pro-monthly-spend">0 ريال</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">الإنفاق السنويumulatif</div>
+                    <div class="text-2xl font-extrabold text-indigo-600" id="pro-yearly-spend">0 ريال</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">طلبات الأسعار المعلقة (RFQ)</div>
+                    <div class="text-2xl font-extrabold text-amber-600" id="pro-rfq-count">0</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">الموردون النشطون</div>
+                    <div class="text-2xl font-extrabold text-slate-900" id="pro-active-suppliers">0</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-trophy text-amber-500"></i> أفضل الموردين حسب حجم المشتريات
+                </h3>
+                <div id="pro-top-suppliers" class="space-y-3"></div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-calendar text-blue-500"></i> اتجاه الإنفاق الشهري (آخر 6 أشهر)
+                </h3>
+                <div id="pro-monthly-trend" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center"></div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-list text-rose-500"></i> طلبات الأسعار المعلقة (RFQ)
+                    </h3>
+                    <button onclick="createRFQ()" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition">
+                        <i class="fa-solid fa-plus"></i> طلب جديد
+                    </button>
+                </div>
+                <div id="pro-rfq-list" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 8: CONTRACTS ================= -->
+        <section id="tab-contracts" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-amber-900 via-slate-900 to-amber-950 text-white rounded-2xl p-6 shadow-md border border-amber-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-file-contract text-amber-400"></i> إدارة العقود والموردين
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">تتبع عقود التوريد، تواريخ التجديد التلقائي، والتذكير قبل الانتهاء.</p>
+                    </div>
+                    <button onclick="openContractModal()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> عقد جديد
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">إجمالي العقود</div>
+                    <div class="text-2xl font-extrabold text-amber-600" id="ct-total">0</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">عقود نشطة</div>
+                    <div class="text-2xl font-extrabold text-emerald-600" id="ct-active">0</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">قيد التجديد</div>
+                    <div class="text-2xl font-extrabold text-amber-500" id="ct-renewing">0</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 mb-1">منتهية الصلاحية</div>
+                    <div class="text-2xl font-extrabold text-rose-600" id="ct-expired">0</div>
+                </div>
+            </div>
+
+            <div id="ct-alerts" class="mb-6"></div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-amber-50 text-amber-700 font-bold border-b border-amber-200">
+                                <th class="py-3 px-3 text-center">رقم العقد</th>
+                                <th class="py-3 px-4">المورد</th>
+                                <th class="py-3 px-4">المادة</th>
+                                <th class="py-3 px-4 text-center">القيمة الإجمالية</th>
+                                <th class="py-3 px-4 text-center">تاريخ البداية</th>
+                                <th class="py-3 px-4 text-center">تاريخ الانتهاء</th>
+                                <th class="py-3 px-4 text-center">التجديد التلقائي</th>
+                                <th class="py-3 px-4 text-center">الحالة</th>
+                                <th class="py-3 px-4 text-center">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ctTableBody" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 9: SUPPLIER EVALUATION ================= -->
+        <section id="tab-suppliereval" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-rose-900 via-slate-900 to-rose-950 text-white rounded-2xl p-6 shadow-md border border-rose-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-star text-rose-400"></i> تقييم الموردين
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">تقييم الموردين حسب الجودة، الالتزام بالموعد، والاستجابة. نظام نجوم من 1 إلى 5.</p>
+                    </div>
+                    <button onclick="openEvalModal()" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> إضافة تقييم
+                    </button>
+                </div>
+            </div>
+
+            <div id="seGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-5 px-4 text-center text-xs border-t border-slate-900 mt-auto">
+        <p>شركة التميز المطور للمقاولات (TMTCO KSA) © 2026 | <a href="https://www.tmtcoksa.com/" target="_blank" class="text-amber-400 hover:underline">www.tmtcoksa.com</a> - Al Rehab Dist, Jeddah, Saudi Arabia</p>
+    </footer>
+
+    <!-- ADD/EDIT CONTACT MODAL -->
+    <div id="contactModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div class="p-5 bg-slate-900 text-white rounded-t-2xl flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2">
+                    <i class="fa-solid fa-user-gear text-amber-400"></i> إضافة / تعديل بيانات جهة الاتصال
+                </h3>
+                <button onclick="closeModal('contactModal')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="contactForm" onsubmit="saveContact(event)" class="p-6 space-y-4 text-xs font-semibold">
+                <input type="hidden" id="modal-contact-id">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">اسم جهة الاتصال *</label>
+                        <input type="text" id="modal-contact-name" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">المسمى الوظيفي</label>
+                        <input type="text" id="modal-title" placeholder="مدير مشتريات / مالك" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">اسم الشركة *</label>
+                        <input type="text" id="modal-company" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">نوع الجهة *</label>
+                        <select id="modal-type" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="عميل">عميل</option>
+                            <option value="مورد">مورد</option>
+                            <option value="مقاول عام">مقاول عام</option>
+                            <option value="مصنع">مصنع</option>
+                            <option value="استشاري">مكتب استشاري</option>
+                            <option value="جهة حكومية">جهة حكومية</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">النشاط الرئيسي *</label>
+                        <select id="modal-activity" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="مقاولات عامة">مقاولات عامة</option>
+                            <option value="مقاولات طرق">مقاولات طرق</option>
+                            <option value="خرسانة جاهزة">خرسانة جاهزة</option>
+                            <option value="مصانع بلوك">مصانع بلوك</option>
+                            <option value="حديد ومواد إنشائية">حديد ومواد إنشائية</option>
+                            <option value="معدات ثقيلة">معدات ثقيلة</option>
+                            <option value="تأجير معدات">تأجير معدات</option>
+                            <option value="نقل وشحن">نقل وشحن</option>
+                            <option value="تشطيبات">تشطيبات</option>
+                            <option value="مكاتب استشارية">مكاتب استشارية</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">المدينة *</label>
+                        <select id="modal-city" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="جدة">جدة</option>
+                            <option value="الرياض">الرياض</option>
+                            <option value="مكة المكرمة">مكة المكرمة</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">القطاع الجغرافي بجدة</label>
+                        <select id="modal-sector" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="شمال جدة">شمال جدة</option>
+                            <option value="وسط جدة">وسط جدة</option>
+                            <option value="جنوب جدة (الصناعية/الخمرة)">جنوب جدة (الصناعية/الخمرة)</option>
+                            <option value="شرق جدة">شرق جدة وذهبان</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">الحي</label>
+                        <input type="text" id="modal-district" placeholder="الخمرة / الروضة / أبحر" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">رقم الهاتف / الواتساب *</label>
+                        <input type="text" id="modal-phone" required placeholder="050XXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">البريد الإلكتروني</label>
+                        <input type="email" id="modal-email" placeholder="info@company.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+                <div class="pt-4 flex justify-end gap-2 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('contactModal')" class="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-xl hover:bg-slate-200 transition">إلغاء</button>
+                    <button type="submit" class="px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PO Add/Edit Modal -->
+    <div id="poModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div class="p-5 bg-indigo-900 text-white rounded-t-2xl flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2" id="poModalTitle">
+                    <i class="fa-solid fa-plus text-indigo-400"></i> طلب شراء جديد
+                </h3>
+                <button onclick="closeModal('poModal')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="poForm" onsubmit="savePO(event)" class="p-6 space-y-4 text-xs font-semibold">
+                <input type="hidden" id="poModalId">
+                <input type="hidden" id="poModalPoNumber">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">المورد *</label>
+                        <select id="poModalSupplier" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="">اختر مورداً</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">رقم الطلب (PO Number)</label>
+                        <input type="text" id="poModalPoNumberManual" placeholder="يُولد تلقائياً إن ترك فارغاً" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">اسم المادة *</label>
+                        <input type="text" id="poModalMaterial" required placeholder="مثل: حديد تسليح 12مم" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">الكمية *</label>
+                        <input type="number" id="poModalQuantity" required min="0.01" step="0.01" placeholder="0" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">الوحدة *</label>
+                        <select id="poModalUnit" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="طن">طن</option>
+                            <option value="كيس">كيس</option>
+                            <option value="متر مكعب">متر مكعب</option>
+                            <option value="قطعة">قطعة</option>
+                            <option value="العبوة">العبوة</option>
+                            <option value="لتر">لتر</option>
+                            <option value="متر">متر</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">سعر الوحدة (ريال)</label>
+                        <input type="number" id="poModalUnitPrice" required min="0" step="0.01" placeholder="0.00" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">تاريخ الطلب</label>
+                        <input type="date" id="poModalOrderDate" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">تاريخ التسليم المتوقع</label>
+                        <input type="date" id="poModalExpectedDate" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 mb-1">الحالة *</label>
+                    <select id="poModalStatus" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                        <option value="قيد الموافقة">قيد الموافقة</option>
+                        <option value="تم الإرسال">تم الإرسال</option>
+                        <option value="قيد التنفيذ">قيد التنفيذ</option>
+                        <option value="تم الاستلام">تم الاستلام</option>
+                        <option value="ملغي">ملغي</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-slate-700 mb-1">ملاحظات</label>
+                    <textarea id="poModalNotes" rows="2" placeholder="ملاحظات حول التسليم أو الموقع..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600"></textarea>
+                </div>
+                <div class="pt-4 flex justify-end gap-2 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('poModal')" class="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-xl hover:bg-slate-200 transition">إلغاء</button>
+                    <button type="submit" class="px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">حفظ الطلب</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contract Add/Edit Modal -->
+    <div id="ctModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div class="p-5 bg-amber-900 text-white rounded-t-2xl flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2" id="ctModalTitle">
+                    <i class="fa-solid fa-plus text-amber-400"></i> عقد توريد جديد
+                </h3>
+                <button onclick="closeModal('ctModal')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="ctForm" onsubmit="saveContract(event)" class="p-6 space-y-4 text-xs font-semibold">
+                <input type="hidden" id="ctModalId">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">المورد *</label>
+                        <select id="ctModalSupplier" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600">
+                            <option value="">اختر مورداً</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">رقم العقد</label>
+                        <input type="text" id="ctModalNumber" placeholder="يُولد تلقائياً" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 mb-1">المادة / نطاق العمل *</label>
+                    <input type="text" id="ctModalMaterial" required placeholder="مثل: أسمنت مقاوم / توريد سنوي" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">القيمة الإجمالية (ريال)</label>
+                        <input type="number" id="ctModalValue" required min="0" step="0.01" placeholder="0.00" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">تاريخ البداية</label>
+                        <input type="date" id="ctModalStart" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">تاريخ الانتهاء</label>
+                        <input type="date" id="ctModalEnd" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">إشعار التجديد قبل (أيام)</label>
+                        <input type="number" id="ctModalNotice" value="30" min="0" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600">
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 mb-2">
+                    <input type="checkbox" id="ctModalAutoRenew" class="rounded text-amber-600 focus:ring-amber-500">
+                    <label class="text-sm font-semibold text-slate-700">تجديد تلقائي</label>
+                </div>
+                <div>
+                    <label class="block text-slate-700 mb-1">ملاحظات</label>
+                    <textarea id="ctModalNotes" rows="2" placeholder="ملاحظات حول العقد..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-600"></textarea>
+                </div>
+                <div class="pt-4 flex justify-end gap-2 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('ctModal')" class="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-xl hover:bg-slate-200 transition">إلغاء</button>
+                    <button type="submit" class="px-5 py-2.5 bg-amber-600 text-white font-bold rounded-xl hover:bg-amber-700 transition">حفظ العقد</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Supplier Evaluation Modal -->
+    <div id="seModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div class="p-5 bg-rose-900 text-white rounded-t-2xl flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2" id="seModalTitle">
+                    <i class="fa-solid fa-star text-rose-400"></i> تقييم مورد
+                </h3>
+                <button onclick="closeModal('seModal')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="seForm" onsubmit="saveSupplierEvaluation(event)" class="p-6 space-y-4 text-xs font-semibold">
+                <input type="hidden" id="seModalId">
+                <div>
+                    <label class="block text-slate-700 mb-1">اسم المورد *</label>
+                    <select id="seModalSupplier" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-rose-600">
+                        <option value="">اختر مورداً</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1 text-center">الجودة (1-5)</label>
+                        <div class="flex justify-center gap-1" id="seQualityStars"></div>
+                        <input type="hidden" id="seModalQuality" value="0">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1 text-center">الالتزام بالموعد (1-5)</label>
+                        <div class="flex justify-center gap-1" id="seOnTimeStars"></div>
+                        <input type="hidden" id="seModalOnTime" value="0">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1 text-center">الاستجابة (1-5)</label>
+                        <div class="flex justify-center gap-1" id="seResponseStars"></div>
+                        <input type="hidden" id="seModalResponse" value="0">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 mb-1">ملاحظات التقييم</label>
+                    <textarea id="seModalNotes" rows="2" placeholder="ملاحظات حول أداء المورد..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-rose-600"></textarea>
+                </div>
+                <div class="pt-4 flex justify-end gap-2 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('seModal')" class="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-xl hover:bg-slate-200 transition">إلغاء</button>
+                    <button type="submit" class="px-5 py-2.5 bg-rose-600 text-white font-bold rounded-xl hover:bg-rose-700 transition">حفظ التقييم</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Google Gemini Deep Search Function (globally available) -->
+    <script>
+        async function triggerGoogleDeepSearch() {
+            const query = document.getElementById('materialSearchInput').value.trim();
+            if (!query) return;
+
+            const loader = document.getElementById('googleSearchLoader');
+            const grid = document.getElementById('materialsResultsGrid');
+
+            loader.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+                const systemPrompt = `أنت مساعد متكفّل بالمشتروات وتوريد مواد البناء في قطاع الإنشاءات بمدينة جدة، المملكة العربية السعودية.
+استخدم أداة البحث في قوقل (Google Search) للبحث عن الموردين والموزعين المعتمدين والمستودعات في جدة ومكة المطلوبة في الاستعلام.
+قم بإرجاع النتائج بصيغة JSON حصرية بتنسيق المصفوفة التالية فقط بدون أي نصوص خارجية:
+[
+  {
+    "id": "GOOG-1",
+    "materialName": "اسم المادة أو المنتج أو المعدة بالكامل",
+    "brand": "العلامة التجارية",
+    "category": "تصنيف المادة",
+    "supplierName": "اسم الشركة أو المورد بجدة",
+    "contactPerson": "اسم الشخص أو مسؤول المبيعات (أو مبيعات الشركة)",
+    "phone": "رقم الهاتف المباشر (مثل 050XXXXXXX)",
+    "city": "جدة",
+    "sector": "القطاع (شمال جدة / وسط جدة / جنوب جدة / شرق جدة)",
+    "district": "الحي (مثل الخمرة، بريمان، الصناعية، الروضة)",
+    "delivery": "تفاصيل التوصيل والنقل للمواقع",
+    "priceEst": "السعر التقديري الحتلي",
+    "sourceTitle": "مصدر قوقل",
+    "sourceUri": "رابط المصدر"
+  }
+]`;
+
+                const userPrompt = `ابحث في قوقل عن الموردين والموزعين والمستودعات المعتمدة في جدة ومحيطها للمادة أو المعدة التالية: "${query}". استخرج أرقام الاتصال والعناوين الحقيقية.`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userPrompt }] }],
+                    tools: [{ "google_search": {} }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                loader.classList.add('hidden');
+
+                const candidateText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                let sources = [];
+                const groundingMetadata = result.candidates?.[0]?.groundingMetadata;
+                if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                    sources = groundingMetadata.groundingAttributions
+                        .map(a => ({ uri: a.web?.uri, title: a.web?.title }))
+                        .filter(s => s.uri && s.title);
+                }
+
+                if (candidateText) {
+                    let parsedData = [];
+                    try {
+                        if (!apiKey) {
+                            renderMaterialsGrid(query);
+                            return;
+                        }
+                        const jsonMatch = candidateText.match(/\[[\s\S]*\]/);
+                        if (jsonMatch) {
+                            parsedData = JSON.parse(jsonMatch[0]);
+                        }
+                    } catch (e) {
+                        console.warn("Could not parse JSON directly, falling back to rendering text result.");
+                    }
+
+                    if (parsedData.length > 0) {
+                        parsedData.forEach((item, idx) => {
+                            item.id = `GOOG-${Date.now()}-${idx}`;
+                            item.keywords = [query, item.materialName, item.brand, item.supplierName];
+                            item.inDirectory = false;
+                            if (sources[idx]) {
+                                item.sourceUri = sources[idx].uri;
+                                item.sourceTitle = sources[idx].title;
+                            }
+                        });
+                        renderMaterialsGrid(query);
+                        return;
+                    }
+                }
+
+                renderMaterialsGrid(query);
+            } catch (err) {
+                console.error("Google search integration error:", err);
+                loader.classList.add('hidden');
+                renderMaterialsGrid(query);
+            }
+        }
+    </script>
+
+    <!-- Helper: closeModal global -->
+    <script>
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+    </script>
+
+    <!-- TMTCO Modules (load order matters) -->
+    <script src="system/tmtco-core.js"></script>
+    <script src="system/tmtco-auth.js"></script>
+    <script src="system/tmtco-ui.js"></script>
+    <script src="system/tmtco-business.js"></script>
+    <script src="system/tmtco-app.js"></script>
+
+</body>
+</html>

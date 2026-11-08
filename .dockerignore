@@ -1,0 +1,7 @@
+.env
+.git
+.kilo
+**/__pycache__/
+**/*.py[cod]
+server/data/
+.venv/

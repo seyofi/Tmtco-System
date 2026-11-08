@@ -1,0 +1,50 @@
+services:
+  database:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: tmtco
+      POSTGRES_USER: tmtco
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - tmtco-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tmtco -d tmtco"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  app:
+    build: .
+    environment:
+      APP_ENV: production
+      SESSION_TTL_HOURS: 8
+      DATABASE_URL: postgresql+psycopg://tmtco:${POSTGRES_PASSWORD}@database:5432/tmtco
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:-}
+      BRAVE_SEARCH_API_KEY: ${BRAVE_SEARCH_API_KEY:-}
+      SUPPLIER_SEARCH_ORIGINS: https://${DOMAIN}
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: unless-stopped
+
+  proxy:
+    image: caddy:2-alpine
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  tmtco-postgres:
+  caddy-data:
+  caddy-config:

@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة التميز المطور للمقاولات | TMTCO - نظام إدارة العملاء والموردين ومواد البناء</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cairo & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+        }
+        .search-shadow {
+            box-shadow: 0 10px 25px -5px rgba(31, 78, 120, 0.15), 0 8px 10px -6px rgba(31, 78, 120, 0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Top Navigation & Brand Header -->
+    <header class="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 text-white border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Title with Official Website & Logo Integration -->
+                <div class="flex items-center gap-3">
+                    <a href="https://www.tmtcoksa.com/" target="_blank" title="زيارة موقع شركة التميز المطور للمقاولات" class="bg-amber-500 hover:bg-amber-400 text-slate-950 w-11 h-11 rounded-xl flex items-center justify-center font-extrabold shadow-md transition transform hover:scale-105 overflow-hidden">
+                        <img src="https://www.tmtcoksa.com/wp-content/uploads/2023/04/cropped-logo-tmtco-1.png" alt="TMTCO Logo" class="w-9 h-9 object-contain" onerror="this.onerror=null; this.parentNode.innerHTML='<i class=\'fa-solid fa-building-user text-xl\'></i>';">
+                    </a>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-base sm:text-lg font-black tracking-tight leading-none text-white">
+                                شركة التميز المطور للمقاولات
+                            </h1>
+                            <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold px-2 py-0.5 rounded">TMTCO</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-2">
+                            <span>Al-Tamyooz Al-Motawer Contracting Co.</span>
+                            <a href="https://www.tmtcoksa.com/" target="_blank" class="text-amber-400 hover:underline hidden sm:inline"><i class="fa-solid fa-globe"></i> tmtcoksa.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="hidden md:flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/50 text-xs font-bold">
+                    <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="nav-tab-btn active px-4 py-2 rounded-lg transition flex items-center gap-2 bg-indigo-600 text-white">
+                        <i class="fa-solid fa-chart-pie"></i> لوحة التحليلات
+                    </button>
+                    <button onclick="switchTab('contacts')" id="tab-btn-contacts" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-address-book"></i> قاعدة الجهات الشاملة
+                    </button>
+                    <button onclick="switchTab('materials')" id="tab-btn-materials" class="nav-tab-btn px-4 py-2 rounded-lg text-amber-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2 border border-amber-500/30">
+                        <i class="fa-solid fa-boxes-stacked text-amber-400"></i> سوق المواد (عربي / Eng)
+                    </button>
+                    <button onclick="switchTab('jeddah')" id="tab-btn-jeddah" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-amber-400"></i> قطاعات جدة والأحياء
+                    </button>
+                    <button onclick="switchTab('interactions')" id="tab-btn-interactions" class="nav-tab-btn px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-comments"></i> سجل المتابعات
+                    </button>
+                </nav>
+
+                <!-- Quick Action Modal Button -->
+                <div class="flex items-center gap-2">
+                    <button onclick="openAddModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md transition flex items-center gap-2">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>إضافة جهة جديدة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Tabs -->
+        <div class="md:hidden flex overflow-x-auto bg-slate-900 px-4 py-2 gap-2 border-t border-slate-800 text-xs font-bold">
+            <button onclick="switchTab('dashboard')" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white whitespace-nowrap">لوحة التحليلات</button>
+            <button onclick="switchTab('contacts')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">الجهات الشاملة</button>
+            <button onclick="switchTab('materials')" class="px-3 py-1.5 rounded-lg bg-amber-600 text-white whitespace-nowrap">مواد البناء (AR/EN)</button>
+            <button onclick="switchTab('jeddah')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">قطاعات جدة</button>
+            <button onclick="switchTab('interactions')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 whitespace-nowrap">المتابعات</button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full space-y-6">
+
+        <!-- ================= TAB 1: DASHBOARD & ANALYTICS ================= -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            
+            <!-- KPI Summary Metric Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">إجمالي الجهات المسجلة</span>
+                        <i class="fa-solid fa-users text-indigo-600 bg-indigo-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-total-contacts" class="text-2xl sm:text-3xl font-extrabold text-slate-900">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">سجل متاح بالنظام</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">جهات منطقة جدة</span>
+                        <i class="fa-solid fa-map-pin text-amber-600 bg-amber-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-jeddah-contacts" class="text-2xl sm:text-3xl font-extrabold text-amber-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">موزعة على أحياء جدة</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">المقاولون والعملاء</span>
+                        <i class="fa-solid fa-helmet-safety text-emerald-600 bg-emerald-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-contractors-count" class="text-2xl sm:text-3xl font-extrabold text-emerald-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">عميل ومقاول عام</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">الموردون والمصانع</span>
+                        <i class="fa-solid fa-industry text-blue-600 bg-blue-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-suppliers-count" class="text-2xl sm:text-3xl font-extrabold text-blue-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">مورد ومصنع خرسانة/حديد</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">جاهزية التواصل (WhatsApp)</span>
+                        <i class="fa-brands fa-whatsapp text-emerald-600 bg-emerald-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-wa-percentage" class="text-2xl sm:text-3xl font-extrabold text-slate-900">0%</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">أرقام موثقة</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 mb-2">
+                        <span class="text-xs font-bold">متابعات مستحقة هذا الأسبوع</span>
+                        <i class="fa-solid fa-clock text-rose-600 bg-rose-50 p-2 rounded-lg"></i>
+                    </div>
+                    <div>
+                        <span id="kpi-pending-followups" class="text-2xl sm:text-3xl font-extrabold text-rose-600">0</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">تحتاج لتواصل عاجل</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts & Segment Overview -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Sector Breakdown Card -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-chart-bar text-indigo-600"></i> توزيع الجهات حسب النشاط الرئيسي
+                    </h3>
+                    <div id="activity-breakdown-list" class="space-y-3">
+                        <!-- Dynamic Progress Bars -->
+                    </div>
+                </div>
+
+                <!-- Jeddah District Distribution -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-map text-amber-500"></i> التوزيع الجغرافي لأحياء جدة
+                    </h3>
+                    <div id="jeddah-districts-list" class="space-y-3">
+                        <!-- Dynamic District Progress -->
+                    </div>
+                </div>
+
+                <!-- Data Quality & Action Needed -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                            <i class="fa-solid fa-shield-heart text-emerald-600"></i> مؤشرات صحة جودة البيانات (Data Health)
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-xs font-bold text-slate-700">سجلات كاملة (واتساب + بريد + موقع)</span>
+                                <span id="health-complete-count" class="text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">0</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-xs font-bold text-slate-700">سجلات بدون بريد إلكتروني</span>
+                                <span id="health-missing-email" class="text-xs font-black text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">0</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-xs font-bold text-slate-700">سجلات بدون هاتف مباشر</span>
+                                <span id="health-missing-phone" class="text-xs font-black text-rose-600 bg-rose-50 px-2.5 py-1 rounded-lg">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+                        <div class="flex items-center gap-2 text-indigo-900 font-bold text-xs mb-1">
+                            <i class="fa-solid fa-lightbulb text-amber-500"></i> توصية التوسع المستهدفة بجدة:
+                        </div>
+                        <p class="text-[11px] text-indigo-700 leading-relaxed">
+                            تُظهر البيانات تركز مصانع الخرسانة وموردي المعدات في <strong>المنطقة الصناعية والخمرة (جنوب جدة)</strong>، بينما يتركز المطورون العقاريون والمقاولون في <strong>الروضة وأبحر (شمال جدة)</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: MAIN DIRECTORY & SMART SEARCH ================= -->
+        <section id="tab-contacts" class="tab-content space-y-6 hidden">
+            <!-- Header Banner & Quick Search Stats -->
+            <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white rounded-2xl p-6 shadow-md border border-slate-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-address-book text-amber-400"></i> قاعدة بيانات الجهات الشاملة وسجل الموردين
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">البحث الذكي المباشر بأسماء الأشخاص، الشركات، الأنشطة، أرقام التواصل وأحياء مدينة جدة.</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="bg-slate-800/80 border border-slate-700 text-amber-300 text-xs font-bold px-3 py-1.5 rounded-xl">
+                            <i class="fa-solid fa-filter"></i> تصفية سريعة
+                        </span>
+                        <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold px-3 py-1.5 rounded-xl">
+                            مفعل بالكامل
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Search Bar & Multi-Filter Control Box -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+                <!-- Main Instant Search Bar -->
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="smartSearchInput" 
+                        placeholder="اكتب أول حرف، اسم العميل، اسم الشركة، النشاط، رقم الهاتف، الإيميل، أو اسم الحي بجدة..." 
+                        class="w-full bg-slate-50 border-2 border-indigo-200 rounded-xl py-3.5 px-4 pr-11 text-slate-900 font-bold placeholder-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white text-sm sm:text-base transition"
+                    >
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-indigo-600">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </div>
+                </div>
+
+                <!-- Dropdown Filter Controls Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs font-bold">
+                    <div>
+                        <label class="block text-slate-500 mb-1">نوع الجهة</label>
+                        <select id="filterType" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الأنواع</option>
+                            <option value="عميل">عميل</option>
+                            <option value="مورد">مورد</option>
+                            <option value="مقاول عام">مقاول عام</option>
+                            <option value="مصنع">مصنع</option>
+                            <option value="استشاري">مكتب استشاري</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 mb-1">النشاط الرئيسي</label>
+                        <select id="filterActivity" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الأنشطة</option>
+                            <option value="مقاولات عامة">مقاولات عامة</option>
+                            <option value="مقاولات طرق">مقاولات طرق</option>
+                            <option value="خرسانة جاهزة">خرسانة جاهزة</option>
+                            <option value="مصانع بلوك">مصانع بلوك</option>
+                            <option value="حديد ومواد إنشائية">حديد ومواد إنشائية</option>
+                            <option value="معدات ثقيلة">معدات ثقيلة</option>
+                            <option value="تأجير معدات">تأجير معدات</option>
+                            <option value="نقل وشحن">نقل وشحن</option>
+                            <option value="تشطيبات">تشطيبات</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 mb-1">المدينة</label>
+                        <select id="filterCity" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع المدن</option>
+                            <option value="جدة">جدة</option>
+                            <option value="الرياض">الرياض</option>
+                            <option value="مكة المكرمة">مكة المكرمة</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 mb-1">حالة المتابعة</label>
+                        <select id="filterStatus" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:outline-none focus:border-indigo-600">
+                            <option value="">جميع الحالات</option>
+                            <option value="مهتم">مهتم</option>
+                            <option value="طلب عرض سعر">طلب عرض سعر</option>
+                            <option value="تم الاتفاق">تم الاتفاق</option>
+                            <option value="جديد">جديد</option>
+                            <option value="لم يرد">لم يرد</option>
+                        </select>
+                    </div>
+
+                    <div class="col-span-2 md:col-span-1 flex items-end gap-2">
+                        <button onclick="resetFilters()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold p-2.5 rounded-xl border border-slate-200 transition text-center">
+                            إعادة ضبط
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 text-xs font-bold">
+                    <span class="text-slate-400">اختصارات سريعة:</span>
+                    <button onclick="setQuickSearch('جدة')" class="bg-amber-50 text-amber-800 border border-amber-200 px-3 py-1 rounded-lg hover:bg-amber-100 transition">شركات جدة</button>
+                    <button onclick="setQuickSearch('خرسانة')" class="bg-indigo-50 text-indigo-800 border border-indigo-200 px-3 py-1 rounded-lg hover:bg-indigo-100 transition">خرسانة جاهزة</button>
+                    <button onclick="setQuickSearch('حديد')" class="bg-blue-50 text-blue-800 border border-blue-200 px-3 py-1 rounded-lg hover:bg-blue-100 transition">حديد ومعدات</button>
+                    <button onclick="setQuickSearch('الخمرة')" class="bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-lg hover:bg-emerald-100 transition">حي الخمرة</button>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-4 bg-slate-900 text-white flex items-center justify-between text-xs font-bold">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-amber-400"></i> نتجة الفلترة المباشرة: 
+                        <span id="contacts-found-count" class="bg-amber-500 text-slate-950 px-2 py-0.5 rounded-md font-black">0</span> سجل
+                    </span>
+                    <span class="text-slate-400">انقر على الرقم للمراسلة المباشرة أو الخريطة للموقع</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                <th class="py-3.5 px-3 text-center">#</th>
+                                <th class="py-3.5 px-4">اسم جهة الاتصال والشركة</th>
+                                <th class="py-3.5 px-4">النوع والنشاط الرئيسي</th>
+                                <th class="py-3.5 px-4">المدينة والحي</th>
+                                <th class="py-3.5 px-4 text-center">واتساب</th>
+                                <th class="py-3.5 px-4 text-center">الموقع</th>
+                                <th class="py-3.5 px-4 text-center">Gmail</th>
+                                <th class="py-3.5 px-4 text-center">الحالة</th>
+                                <th class="py-3.5 px-4 text-center">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mainContactsTableBody" class="divide-y divide-slate-100 font-medium text-slate-700">
+                            <!-- Dynamic Rows -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty Search Result Fallback -->
+                <div id="noContactsFound" class="hidden p-8 text-center bg-slate-50">
+                    <i class="fa-solid fa-users-slash text-4xl text-slate-300 mb-3"></i>
+                    <p class="font-bold text-slate-700">لم يتم العثور على أي نتائج مطابقة للبحث!</p>
+                    <p class="text-xs text-slate-500 mt-1">جرب تغيير الحرف، أو إعادة ضبط الفلاتر لتغطية المزيد من النتائج.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= NEW TAB: DEEP MATERIALS & SUPPLIER SEARCH (BILINGUAL) ================= -->
+        <section id="tab-materials" class="tab-content space-y-6 hidden">
+            <!-- Header Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-md">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black text-amber-400 flex items-center gap-2">
+                            <i class="fa-solid fa-truck-ramp-box"></i> محرك بحث مواد وموردين البناء الذكي (مدمج مع Google Search & Gemini AI)
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">ابحث بأسماء المواد والعلامات التجارية بالعربي أو الإنجليزي للحصول على الموردين والموزعين الميدانيين بجدة عبر قوقل مباشرة.</p>
+                    </div>
+                    <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold px-3 py-1.5 rounded-xl">
+                        <i class="fa-brands fa-google text-amber-400"></i> مدمج بمحرك بحث Google الحي
+                    </span>
+                </div>
+            </div>
+
+            <!-- Material Search Box & Category Presets -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+                <div class="flex gap-2">
+                    <div class="relative flex-1">
+                        <input 
+                            type="text" 
+                            id="materialSearchInput" 
+                            placeholder="ابحث مثل قوقل: أسمنت الصفوة جدة الخمرة، حديد الراجحي 12 مم، Safwa Cement, Sikaflex Jeddah..." 
+                            class="w-full bg-slate-50 border-2 border-amber-200 rounded-xl py-3.5 px-4 pr-11 text-slate-900 font-bold placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white text-sm sm:text-base transition"
+                        >
+                        <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-amber-600">
+                            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                        </div>
+                    </div>
+                    <button onclick="triggerGoogleDeepSearch()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs sm:text-sm px-5 py-3.5 rounded-xl shadow-md transition flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-globe"></i> بحث عميق عبر قوقل
+                    </button>
+                </div>
+
+                <!-- Quick Preset Keywords (Bilingual) -->
+                <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+                    <span class="text-slate-500">بحث سريع بأسماء المواد / Search Shortcuts:</span>
+                    <button onclick="searchMaterial('أسمنت الصفوة جدة')" class="bg-amber-50 text-amber-900 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-lg transition">أسمنت الصفوة جدة</button>
+                    <button onclick="searchMaterial('حديد الراجحي جدة الخمرة')" class="bg-blue-50 text-blue-900 hover:bg-blue-100 border border-blue-200 px-3 py-1.5 rounded-lg transition">حديد الراجحي الخمرة</button>
+                    <button onclick="searchMaterial('خرسانة جاهزة C35 جدة')" class="bg-emerald-50 text-emerald-900 hover:bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-lg transition">خرسانة جاهزة C35</button>
+                    <button onclick="searchMaterial('Sikaflex waterproofing Jeddah')" class="bg-purple-50 text-purple-900 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-lg transition">مواد عزل سيكا Sikaflex</button>
+                    <button onclick="searchMaterial('تأجير بوكلينات ومعدات جدة')" class="bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300 px-3 py-1.5 rounded-lg transition">معدات وبوكلينات جدة</button>
+                    <button onclick="searchMaterial('')" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-3 py-1.5 rounded-lg transition">عرض الجميع</button>
+                </div>
+            </div>
+
+            <!-- Loading Indicator for Live Google AI Search -->
+            <div id="googleSearchLoader" class="hidden bg-white rounded-2xl p-8 border border-amber-200 shadow-sm text-center space-y-3">
+                <div class="inline-block animate-spin text-amber-500 text-3xl"><i class="fa-solid fa-circle-notch"></i></div>
+                <h4 class="font-black text-slate-800 text-sm">جاري البحث المباشر والعميق عبر Google AI في الموردين والمصانع بجدة...</h4>
+                <p class="text-xs text-slate-500">يتم تجميع أسعار وأرقام التواصل الحية وعناوين الأحياء الميدانية.</p>
+            </div>
+
+            <!-- Material Results Grid -->
+            <div id="materialsResultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Dynamic Material & Supplier Cards -->
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: JEDDAH SECTORS & DISTRICTS ================= -->
+        <section id="tab-jeddah" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 rounded-2xl p-6 text-white shadow-md">
+                <h2 class="text-xl font-black flex items-center gap-2">
+                    <i class="fa-solid fa-map-location-dot"></i> التوزيع القطاعي لمدينة جدة والمناطق الصناعية
+                </h2>
+                <p class="text-xs text-amber-100 mt-1">تقسيم محدد وموزع لأحياء شمال، وسط، جنوب، وشرق جدة لسهولة توجيه فريق المبيعات والميدان.</p>
+            </div>
+
+            <!-- Sectors Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- North Jeddah -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span> شمال جدة
+                        </h3>
+                        <span id="sector-count-north" class="text-xs font-black bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">أبحر الشمالية والجنوبية، المحمدية، الشاطئ، النزهة، الحمدانية، الصفا، المروة.</p>
+                    <button onclick="filterByJeddahSector('شمال جدة')" class="w-full bg-slate-50 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">
+                        عرض شركات شمال جدة
+                    </button>
+                </div>
+
+                <!-- Central Jeddah -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> وسط جدة
+                        </h3>
+                        <span id="sector-count-central" class="text-xs font-black bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">الروضة، الخالدية، الحمراء، العزيزية، الفيصلية، مشرفة، البغدادية، البلد.</p>
+                    <button onclick="filterByJeddahSector('وسط جدة')" class="w-full bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">
+                        عرض شركات وسط جدة
+                    </button>
+                </div>
+
+                <!-- South Jeddah & Industrial -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> جنوب جدة والمناطق الصناعية
+                        </h3>
+                        <span id="sector-count-south" class="text-xs font-black bg-amber-50 text-amber-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">الخمرة، المدينة الصناعية الأولى والثانية، الوزيرية، المحجر، مدائن الفهد.</p>
+                    <button onclick="filterByJeddahSector('جنوب جدة')" class="w-full bg-slate-50 hover:bg-amber-50 hover:text-amber-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">
+                        عرض شركات جنوب جدة والصناعية
+                    </button>
+                </div>
+
+                <!-- East Jeddah -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-purple-500 inline-block"></span> شرق جدة وذهبان
+                        </h3>
+                        <span id="sector-count-east" class="text-xs font-black bg-purple-50 text-purple-700 px-2.5 py-1 rounded-lg">0 جهات</span>
+                    </div>
+                    <p class="text-xs text-slate-500">السامر، المنار، بريمان، أم السلم، قويزة، الفروسية، وذهبان.</p>
+                    <button onclick="filterByJeddahSector('شرق جدة')" class="w-full bg-slate-50 hover:bg-purple-50 hover:text-purple-700 border border-slate-200 font-bold text-xs py-2 rounded-xl transition">
+                        عرض شركات شرق جدة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Jeddah Contacts Table Container -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center justify-between">
+                    <span>قائمة جهات الاتصال الخاصة بمدينة جدة</span>
+                    <span class="text-xs font-normal text-slate-500">عرض مصفى لجدة وأحيائها</span>
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-bold">
+                                <th class="py-3 px-3">الاسم والشركة</th>
+                                <th class="py-3 px-3">القطاع والحي</th>
+                                <th class="py-3 px-3">النشاط الرئيسي</th>
+                                <th class="py-3 px-3 text-center">التواصل</th>
+                                <th class="py-3 px-3 text-center">الموقع</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jeddahTableBody" class="divide-y divide-slate-100 font-medium">
+                            <!-- Dynamic Jeddah Contacts -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: CRM INTERACTIONS & FOLLOW-UPS ================= -->
+        <section id="tab-interactions" class="tab-content space-y-6 hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <div>
+                    <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-indigo-600"></i> سجل المتابعات والتواصل (CRM Interaction Tracker)
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">تسجيل عمليات الاتصال، طلبات عروض الأسعار، والمواعيد القادمة.</p>
+                </div>
+                <button onclick="openInteractionModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> إضافة سجل تواصل جديد
+                </button>
+            </div>
+
+            <!-- Timeline Table -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-900 text-white font-bold">
+                                <th class="py-3.5 px-4">تاريخ التواصل</th>
+                                <th class="py-3.5 px-4">اسم جهة الاتصال والشركة</th>
+                                <th class="py-3.5 px-4">وسيلة التواصل</th>
+                                <th class="py-3.5 px-4">نتيجة التواصل</th>
+                                <th class="py-3.5 px-4">الخطوة التالية</th>
+                                <th class="py-3.5 px-4">تاريخ المتابعة القادمة</th>
+                                <th class="py-3.5 px-4">المسؤول الداخلي</th>
+                            </tr>
+                        </thead>
+                        <tbody id="interactionsTableBody" class="divide-y divide-slate-100 font-medium text-slate-700">
+                            <!-- Dynamic Interaction Logs -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-5 px-4 text-center text-xs border-t border-slate-900 mt-auto">
+        <p>شركة التميز المطور للمقاولات (TMTCO KSA) © 2026 | <a href="https://www.tmtcoksa.com/" target="_blank" class="text-amber-400 hover:underline">www.tmtcoksa.com</a> - Al Rehab Dist, Jeddah, Saudi Arabia</p>
+    </footer>
+
+    <!-- ADD/EDIT CONTACT MODAL -->
+    <div id="contactModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div class="p-5 bg-slate-900 text-white rounded-t-2xl flex items-center justify-between">
+                <h3 class="font-bold text-base flex items-center gap-2">
+                    <i class="fa-solid fa-user-gear text-amber-400"></i> إضافة / تعديل بيانات جهة الاتصال
+                </h3>
+                <button onclick="closeModal('contactModal')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="contactForm" onsubmit="saveContact(event)" class="p-6 space-y-4 text-xs font-semibold">
+                <input type="hidden" id="modal-contact-id">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">اسم جهة الاتصال *</label>
+                        <input type="text" id="modal-contact-name" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">المسمى الوظيفي</label>
+                        <input type="text" id="modal-title" placeholder="مدير مشتريات / مالك" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">اسم الشركة *</label>
+                        <input type="text" id="modal-company" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">نوع الجهة *</label>
+                        <select id="modal-type" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="عميل">عميل</option>
+                            <option value="مورد">مورد</option>
+                            <option value="مقاول عام">مقاول عام</option>
+                            <option value="مصنع">مصنع</option>
+                            <option value="استشاري">مكتب استشاري</option>
+                            <option value="جهة حكومية">جهة حكومية</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">النشاط الرئيسي *</label>
+                        <select id="modal-activity" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="مقاولات عامة">مقاولات عامة</option>
+                            <option value="مقاولات طرق">مقاولات طرق</option>
+                            <option value="خرسانة جاهزة">خرسانة جاهزة</option>
+                            <option value="مصانع بلوك">مصانع بلوك</option>
+                            <option value="حديد ومواد إنشائية">حديد ومواد إنشائية</option>
+                            <option value="معدات ثقيلة">معدات ثقيلة</option>
+                            <option value="تأجير معدات">تأجير معدات</option>
+                            <option value="نقل وشحن">نقل وشحن</option>
+                            <option value="تشطيبات">تشطيبات</option>
+                            <option value="مكاتب استشارية">مكاتب استشارية</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">المدينة *</label>
+                        <select id="modal-city" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="جدة">جدة</option>
+                            <option value="الرياض">الرياض</option>
+                            <option value="مكة المكرمة">مكة المكرمة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">القطاع الجغرافي بجدة</label>
+                        <select id="modal-sector" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                            <option value="شمال جدة">شمال جدة</option>
+                            <option value="وسط جدة">وسط جدة</option>
+                            <option value="جنوب جدة">جنوب جدة (الصناعية/الخمرة)</option>
+                            <option value="شرق جدة">شرق جدة وذهبان</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">الحي</label>
+                        <input type="text" id="modal-district" placeholder="الخمرة / الروضة / أبحر" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-700 mb-1">رقم الهاتف / الواتساب *</label>
+                        <input type="text" id="modal-phone" required placeholder="050XXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 mb-1">البريد الإلكتروني</label>
+                        <input type="email" id="modal-email" placeholder="info@company.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end gap-2 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('contactModal')" class="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-xl hover:bg-slate-200 transition">إلغاء</button>
+                    <button type="submit" class="px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Data & Logic -->
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(t => t.classList.add('hidden'));
+
+            // Remove active style from all tab buttons
+            const navButtons = document.querySelectorAll('header nav button');
+            navButtons.forEach(b => {
+                b.classList.remove('bg-indigo-600', 'text-white');
+                b.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-700/50');
+            });
+
+            // Show selected tab content
+            const activeTab = document.getElementById(`tab-${tabId}`);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+            }
+
+            // Highlight active button if exists
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-700/50');
+                activeBtn.classList.add('bg-indigo-600', 'text-white');
+            }
+        }
+
+        // Mock Dataset for Contacts and Materials
+        const contacts = [
+            { id: 1, contactName: "Sultan H. Al-aied", title: "Administrator Manager", companyName: "Homoud Al-Aied & Partners Contracting Co.", type: "مورد", activity: "مقاولات عامة", city: "جدة", sector: "شمال جدة", district: "المحمدية", phone: "0555221115", email: "alaied6@hotmail.com", status: "مهتم" },
+            { id: 2, contactName: "Fahed M. Aladdin", title: "Construction Operation Manager", companyName: "AL-RASHID TRADING & CONTRACTING CO. LTD", type: "مورد", activity: "حديد ومواد إنشائية", city: "جدة", sector: "جنوب جدة", district: "الخمرة", phone: "0505270797", email: "faladdin@rtcc.com.sa", status: "طلب عرض سعر" },
+            { id: 3, contactName: "Ahmed I. Mandili", title: "General Manager", companyName: "AL-JUSOOR UNITED HOLDING COMPANY", type: "عميل", activity: "مقاولات عامة", city: "جدة", sector: "وسط جدة", district: "الروضة", phone: "0599950900", email: "ahmed@al-jusoor.com", status: "تم الاتفاق" },
+            { id: 4, contactName: "WADIH R. FARES", title: "Equipment Manager", companyName: "almabani General Contractors", type: "مقاول عام", activity: "معدات ثقيلة", city: "جدة", sector: "جنوب جدة", district: "المدينة الصناعية", phone: "0505417383", email: "equipment@almabani.com.sa", status: "مهتم" },
+            { id: 5, contactName: "Hicham Iraqi Houssaini", title: "Managing Director", companyName: "Yousef Abdul latif Jameel Group", type: "عميل", activity: "تشطيبات", city: "جدة", sector: "شمال جدة", district: "أبحر الشمالية", phone: "0562222041", email: "h.iraqi@yaligroup.com", status: "جديد" }
+        ];
+
+        // CRM Interactions dataset definition
+        const interactions = [
+            { date: "2026-11-05", contactName: "Fahed M. Aladdin", company: "AL-RASHID TRADING & CONTRACTING", channel: "واتساب", result: "طلب عرض سعر حديد", nextStep: "إرسال جدول الأسعار المحدث", nextDate: "2026-11-10", agent: "حسام السيوفي" },
+            { date: "2026-11-03", contactName: "Ahmed I. Mandili", company: "AL-JUSOOR UNITED HOLDING", channel: "اتصال هاتفي", result: "مهتم بتوريد خرسانة", nextStep: "تنسيق اجتماع ميداني بجدة", nextDate: "2026-11-12", agent: "حسام السيوفي" }
+        ];
+
+        const buildingMaterials = [
+            { id: "M-1", materialName: "أسمنت الصفوة (مقاوم / بورتلاندي)", brand: "الصفوة (Safwa Cement)", category: "أسمنت ومواد أساسية", supplierName: "مصانع وموزعو أسمنت الصفوة", contactPerson: "مبيعات المصنع بجدة", phone: "0505270797", city: "جدة", sector: "جنوب جدة", district: "الخمرة والصناعية", delivery: "توصيل تريلات وخلاطات للموقع", priceEst: "14-16 ريال للكيس", keywords: ["أسمنت", "الصفوة", "cement", "safwa", "أسمنت الصفوة"] },
+            { id: "M-2", materialName: "حديد تسليح الراجحي (12مم / 14مم)", brand: "حديد الراجحي (Rajhi Steel)", category: "حديد ومواد إنشائية", supplierName: "شركة الراجحي للحديد وموزعي جدة", contactPerson: "قسم المبيعات التجارية", phone: "0566265461", city: "جدة", sector: "جنوب جدة", district: "المنطقة الصناعية الثانية", delivery: "شحن مباشر للمشروع", priceEst: "2600-2700 ريال للطن", keywords: ["حديد", "الراجحي", "rebar", "rajhi steel", "حديد الراجحي"] },
+            { id: "M-3", materialName: "خرسانة جاهزة (قوة C35 مقاوم)", brand: "سعودي ريديمكس / خرسانة جدة", category: "خرسانة جاهزة وبلوك", supplierName: "شركة خرسانة جدة المحدودة", contactPerson: "مجهزي المضخات", phone: "0505409899", city: "جدة", sector: "شرق جدة", district: "بريمان والسامر", delivery: "مضخات وخلاطات فورية للموقع", priceEst: "230-250 ريال للمتر المكعب", keywords: ["خرسانة", "جاهزة", "ready mix", "c35", "concrete"] },
+            { id: "M-4", materialName: "مادة عزل سيكا (Sikaflex Construction)", brand: "Sika Saudi Arabia", category: "مواد عزل وكيميائيات بناء", supplierName: "مؤسسة كيماويات البناء الحديثة", contactPerson: "مهندس المبيعات", phone: "0545548600", city: "جدة", sector: "وسط جدة", district: "حي الروضة", delivery: "توصيل سريع للموقع", priceEst: "35-45 ريال للعبوة", keywords: ["سيكا", "عزل", "sikaflex", "waterproofing", "sika"] }
+        ];
+
+        // DOM Element Bindings
+        const smartSearchInput = document.getElementById('smartSearchInput');
+        // Trigger Google Live Search with Gemini Grounding API
+        async function triggerGoogleDeepSearch() {
+            const query = document.getElementById('materialSearchInput').value.trim();
+            if (!query) return;
+
+            const loader = document.getElementById('googleSearchLoader');
+            const grid = document.getElementById('materialsResultsGrid');
+
+            loader.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            try {
+                const apiKey = ""; // Canvas runtime auto-injects key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+                const systemPrompt = `أنت مساعد متكفّل بالمشتروات وتوريد مواد البناء في قطاع الإنشاءات بمدينة جدة، المملكة العربية السعودية.
+استخدم أداة البحث في قوقل (Google Search) للبحث عن الموردين والموزعين المعتمدين والمستودعات في جدة ومكة المطلوبة في الاستعلام.
+قم بإرجاع النتائج بصيغة JSON حصرية بتنسيق المصفوفة التالية فقط بدون أي نصوص خارجية:
+[
+  {
+    "id": "GOOG-1",
+    "materialName": "اسم المادة أو المنتج أو المعدة بالكامل",
+    "brand": "العلامة التجارية",
+    "category": "تصنيف المادة",
+    "supplierName": "اسم الشركة أو المورد بجدة",
+    "contactPerson": "اسم الشخص أو مسؤول المبيعات (أو مبيعات الشركة)",
+    "phone": "رقم الهاتف المباشر (مثل 050XXXXXXX)",
+    "city": "جدة",
+    "sector": "القطاع (شمال جدة / وسط جدة / جنوب جدة / شرق جدة)",
+    "district": "الحي (مثل الخمرة، بريمان، الصناعية، الروضة)",
+    "delivery": "تفاصيل التوصيل والنقل للمواقع",
+    "priceEst": "السعر التقديري الحتلي",
+    "sourceTitle": "مصدر قوقل",
+    "sourceUri": "رابط المصدر"
+  }
+]`;
+
+                const userPrompt = `ابحث في قوقل عن الموردين والموزعين والمستودعات المعتمدة في جدة ومحيطها للمادة أو المعدة التالية: "${query}". استخرج أرقام الاتصال والعناوين الحقيقية.`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userPrompt }] }],
+                    tools: [{ "google_search": {} }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                loader.classList.add('hidden');
+
+                const candidateText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                // Extract sources if present
+                let sources = [];
+                const groundingMetadata = result.candidates?.[0]?.groundingMetadata;
+                if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                    sources = groundingMetadata.groundingAttributions
+                        .map(a => ({ uri: a.web?.uri, title: a.web?.title }))
+                        .filter(s => s.uri && s.title);
+                }
+
+                if (candidateText) {
+                    let parsedData = [];
+                    try {
+                        const jsonMatch = candidateText.match(/\[[\s\S]*\]/);
+                        if (jsonMatch) {
+                            parsedData = JSON.parse(jsonMatch[0]);
+                        }
+                    } catch (e) {
+                        console.warn("Could not parse JSON directly, falling back to rendering text result.");
+                    }
+
+                    if (parsedData.length > 0) {
+                        // Merge fetched items into buildingMaterials dataset
+                        parsedData.forEach((item, idx) => {
+                            item.id = `GOOG-${Date.now()}-${idx}`;
+                            item.keywords = [query, item.materialName, item.brand, item.supplierName];
+                            item.inDirectory = false;
+                            
+                            // Attach google sources
+                            if (sources[idx]) {
+                                item.sourceUri = sources[idx].uri;
+                                item.sourceTitle = sources[idx].title;
+                            }
+
+                            buildingMaterials.unshift(item);
+                        });
+                        renderMaterialsGrid(query);
+                        return;
+                    }
+                }
+                
+                // Fallback to internal keyword match if JSON parsing failed
+                renderMaterialsGrid(query);
+
+            } catch (err) {
+                console.error("Google search integration error:", err);
+                loader.classList.add('hidden');
+                renderMaterialsGrid(query);
+            }
+        }
+
+        // Global DOM Elements
+        // Render Materials Search Grid with Bilingual Keyword Support & Live Google Sources
+        function renderMaterialsGrid(query = '') {
+            const grid = document.getElementById('materialsResultsGrid');
+            grid.innerHTML = '';
+
+            const filtered = buildingMaterials.filter(m => {
+                if (!query) return true;
+                const q = query.toLowerCase().trim();
+                
+                // Match Title, Brand, Category, Supplier, District, OR Bilingual Keywords List
+                const matchesKeywords = m.keywords && m.keywords.some(k => k.toLowerCase().includes(q));
+                return matchesKeywords ||
+                       m.materialName.toLowerCase().includes(q) ||
+                       m.brand.toLowerCase().includes(q) ||
+                       m.supplierName.toLowerCase().includes(q) ||
+                       m.category.toLowerCase().includes(q) ||
+                       m.district.toLowerCase().includes(q);
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200">
+                        <i class="fa-solid fa-boxes-packing text-4xl text-slate-300 mb-3"></i>
+                        <p class="font-bold text-slate-700">لم نجد مواد في الدليل المباشر تطابق "${query}"</p>
+                        <p class="text-xs text-slate-500 mt-1 mb-4">اضغط على زر "بحث عميق عبر قوقل" للبحث المباشر عن الموردين في محرك قوقل وشبكة الويب.</p>
+                        <button onclick="triggerGoogleDeepSearch()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl shadow transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-globe"></i> إطلاق بحث قوقل المباشر الآن
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(mat => {
+                let cleanPhone = (mat.phone || '0500000000').replace(/\D/g, '');
+                if (cleanPhone.startsWith('0')) cleanPhone = '966' + cleanPhone.slice(1);
+                const waMsg = encodeURIComponent(`السلام عليكم ورحمة الله\nمعك حسام السيوفي - مسؤول المشتروات - شركة التميز المطور للمقاولات\nhttps://www.tmtcoksa.com/\n\nنستفسر عن توفر وأسعار توريد (${mat.materialName}) لموقع مشروعنا بجدة.`);
+                const waUrl = `https://wa.me/${cleanPhone}?text=${waMsg}`;
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mat.supplierName + ' ' + (mat.city || 'جدة') + ' ' + (mat.district || ''))}`;
+
+                // Check if already in directory
+                const isAdded = contacts.some(c => c.phone.replace(/\D/g,'') === cleanPhone || c.companyName === mat.supplierName);
+
+                const card = `
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-amber-400 transition">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="bg-amber-50 text-amber-900 border border-amber-200 text-[11px] font-bold px-2.5 py-0.5 rounded-md">${mat.category}</span>
+                                ${mat.sourceUri ? `
+                                    <a href="${mat.sourceUri}" target="_blank" class="text-[10px] bg-blue-50 text-blue-700 hover:underline px-2 py-0.5 rounded font-bold border border-blue-200 flex items-center gap-1">
+                                        <i class="fa-brands fa-google"></i> قوقل
+                                    </a>
+                                ` : `<span class="text-xs font-mono font-bold text-slate-400">${mat.id}</span>`}
+                            </div>
+                            <h3 class="font-black text-slate-900 text-sm leading-snug">${mat.materialName}</h3>
+                            <p class="text-xs font-bold text-indigo-700"><i class="fa-solid fa-building text-slate-400"></i> ${mat.supplierName}</p>
+                            <p class="text-xs text-slate-500"><i class="fa-solid fa-user text-slate-400"></i> المسؤول: ${mat.contactPerson}</p>
+                        </div>
+
+                        <div class="bg-slate-50 p-3 rounded-xl space-y-1.5 text-xs">
+                            <div class="flex items-center justify-between text-slate-700">
+                                <span class="font-bold text-slate-500">الموقع بجدة:</span>
+                                <a href="${mapsUrl}" target="_blank" class="font-bold text-blue-600 hover:underline flex items-center gap-1">
+                                    <i class="fa-solid fa-location-dot"></i> ${mat.sector || 'جدة'} (${mat.district || 'الميدان'})
+                                </a>
+                            </div>
+                            <div class="flex items-center justify-between text-slate-700">
+                                <span class="font-bold text-slate-500">خدمة التوصيل:</span>
+                                <span class="font-medium text-emerald-700">${mat.delivery}</span>
+                            </div>
+                            <div class="flex items-center justify-between text-slate-700 pt-1 border-t border-slate-200">
+                                <span class="font-bold text-slate-500">التسعير التقديري:</span>
+                                <span class="font-bold text-amber-700">${mat.priceEst}</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 flex items-center gap-2">
+                            <a href="${waUrl}" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl transition text-center flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> طلب تسعيرة بالواتساب
+                            </a>
+                            ${isAdded ? `
+                                <button disabled class="bg-slate-100 text-slate-400 font-bold text-xs py-2.5 px-3 rounded-xl border border-slate-200 cursor-not-allowed">
+                                    <i class="fa-solid fa-check text-emerald-600"></i> مضاف مسبقاً
+                                </button>
+                            ` : `
+                                <button onclick="addMaterialSupplierToContacts('${mat.id}')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-bold text-xs py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1">
+                                    <i class="fa-solid fa-user-plus"></i> إضافة لسجل الموردين
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', card);
+            });
+        }
+
+        function searchMaterial(term) {
+            document.getElementById('materialSearchInput').value = term;
+            renderMaterialsGrid(term);
+        }
+
+        // Fast-Add Supplier from Material Search into main Contacts Directory
+        function addMaterialSupplierToContacts(matId) {
+            const mat = buildingMaterials.find(m => m.id === matId);
+            if (!mat) return;
+
+            const newContact = {
+                id: Date.now(),
+                contactName: mat.contactPerson,
+                title: "مسؤول مبيعات التوريد",
+                companyName: mat.supplierName,
+                type: "مورد",
+                activity: mat.category,
+                city: mat.city,
+                sector: mat.sector,
+                district: mat.district,
+                phone: mat.phone,
+                email: "",
+                status: "مهتم"
+            };
+
+            contacts.unshift(newContact);
+            mat.inDirectory = true;
+
+            // Render Updates
+            renderMaterialsGrid(document.getElementById('materialSearchInput').value);
+            applyFilters();
+            updateDashboardKPIs();
+
+            // Notification Feedback
+            alert(`✅ تم إدراج المورد "${mat.supplierName}" بنجاح في قاعدة الجهات والموردين الشاملة!`);
+        }
+
+        // Event listener for live Material Search
+        document.getElementById('materialSearchInput').addEventListener('input', (e) => {
+            renderMaterialsGrid(e.target.value);
+        });
+
+        // Render Contacts Table
+        function renderContactsTable(dataToRender) {
+            mainContactsTableBody.innerHTML = '';
+            document.getElementById('contacts-found-count').textContent = dataToRender.length;
+            const noFound = document.getElementById('noContactsFound');
+
+            if (dataToRender.length === 0) {
+                noFound.classList.remove('hidden');
+                return;
+            } else {
+                noFound.classList.add('hidden');
+            }
+
+            dataToRender.forEach((item) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+
+                // Phone & WA Helper
+                let cleanPhone = item.phone.replace(/\D/g, '');
+                if (cleanPhone.startsWith('0')) cleanPhone = '966' + cleanPhone.slice(1);
+                const waMsg = encodeURIComponent(`السلام عليكم ورحمة الله\nمعك حسام السيوفي - مسؤول المشتروات - شركة التميز المطور للمقاولات\nhttps://www.tmtcoksa.com/\n\nبخصوص طلبات التوريد والمشتروات لشركة ${item.companyName}`);
+                const waUrl = `https://wa.me/${cleanPhone}?text=${waMsg}`;
+                const waButton = `
+                    <a href="${waUrl}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 font-bold text-xs">
+                        <i class="fa-brands fa-whatsapp text-emerald-600"></i> ${item.phone}
+                    </a>
+                `;
+
+                // Maps Helper
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.companyName + ' ' + item.city + ' ' + item.district)}`;
+                const mapsButton = `
+                    <a href="${mapsUrl}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 text-xs">
+                        <i class="fa-solid fa-map-location-dot text-blue-600"></i> ${item.district || item.city}
+                    </a>
+                `;
+
+                // Gmail Helper
+                let gmailButton = `<span class="text-slate-400 italic text-[11px]">غير مسجل</span>`;
+                if (item.email && item.email.includes('@')) {
+                    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${item.email}`;
+                    gmailButton = `
+                        <a href="${gmailUrl}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 text-xs">
+                            <i class="fa-solid fa-envelope text-rose-600"></i> ${item.email}
+                        </a>
+                    `;
+                }
+
+                // Status Badge
+                let statusBadge = `<span class="px-2 py-1 rounded-md text-[11px] font-bold bg-slate-100 text-slate-700">${item.status}</span>`;
+                if (item.status === 'مهتم') statusBadge = `<span class="px-2 py-1 rounded-md text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">مهتم</span>`;
+                if (item.status === 'طلب عرض سعر') statusBadge = `<span class="px-2 py-1 rounded-md text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200">طلب عرض سعر</span>`;
+                if (item.status === 'تم الاتفاق') statusBadge = `<span class="px-2 py-1 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">تم الاتفاق</span>`;
+
+                tr.innerHTML = `
+                    <td class="py-3 px-3 text-center text-slate-400 font-mono">${item.id}</td>
+                    <td class="py-3 px-4">
+                        <div class="font-bold text-slate-900">${item.contactName}</div>
+                        <div class="text-[11px] text-slate-500 font-semibold">${item.companyName}</div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="inline-block px-2 py-0.5 text-[11px] font-bold bg-indigo-50 text-indigo-700 rounded-md mb-0.5">${item.type}</span>
+                        <div class="text-[11px] text-slate-600">${item.activity}</div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <div class="font-bold text-slate-800">${item.city}</div>
+                        <div class="text-[11px] text-slate-500">${item.sector} - ${item.district}</div>
+                    </td>
+                    <td class="py-3 px-4 text-center">${waButton}</td>
+                    <td class="py-3 px-4 text-center">${mapsButton}</td>
+                    <td class="py-3 px-4 text-center">${gmailButton}</td>
+                    <td class="py-3 px-4 text-center">${statusBadge}</td>
+                    <td class="py-3 px-4 text-center">
+                        <button onclick="editContact(${item.id})" class="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="تعديل"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </td>
+                `;
+                mainContactsTableBody.appendChild(tr);
+            });
+        }
+
+        // Apply Multi-Filter Logic
+        function applyFilters() {
+            const query = smartSearchInput.value.trim().toLowerCase();
+            const selectedType = filterType.value;
+            const selectedActivity = filterActivity.value;
+            const selectedCity = filterCity.value;
+            const selectedStatus = filterStatus.value;
+
+            const filtered = contacts.filter(c => {
+                const matchesText = !query || 
+                    c.contactName.toLowerCase().includes(query) ||
+                    c.companyName.toLowerCase().includes(query) ||
+                    c.phone.toLowerCase().includes(query) ||
+                    c.email.toLowerCase().includes(query) ||
+                    c.activity.toLowerCase().includes(query) ||
+                    c.district.toLowerCase().includes(query);
+
+                const matchesType = !selectedType || c.type === selectedType;
+                const matchesActivity = !selectedActivity || c.activity === selectedActivity;
+                const matchesCity = !selectedCity || c.city === selectedCity;
+                const matchesStatus = !selectedStatus || c.status === selectedStatus;
+
+                return matchesText && matchesType && matchesActivity && matchesCity && matchesStatus;
+            });
+
+            renderContactsTable(filtered);
+        }
+
+        function setQuickSearch(val) {
+            smartSearchInput.value = val;
+            applyFilters();
+        }
+
+        function resetFilters() {
+            smartSearchInput.value = '';
+            filterType.value = '';
+            filterActivity.value = '';
+            filterCity.value = '';
+            filterStatus.value = '';
+            applyFilters();
+        }
+
+        // Render Jeddah Specific Sector View
+        function renderJeddahTable(sectorFilter = '') {
+            const body = document.getElementById('jeddahTableBody');
+            body.innerHTML = '';
+
+            const jeddahData = contacts.filter(c => c.city === 'جدة' && (!sectorFilter || c.sector === sectorFilter));
+
+            jeddahData.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3">
+                        <div class="font-bold text-slate-900">${item.contactName}</div>
+                        <div class="text-[11px] text-slate-500">${item.companyName}</div>
+                    </td>
+                    <td class="py-2.5 px-3">
+                        <span class="font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">${item.sector}</span>
+                        <span class="text-slate-600 block text-[11px] mt-0.5">حي ${item.district}</span>
+                    </td>
+                    <td class="py-2.5 px-3 font-semibold text-slate-700">${item.activity}</td>
+                    <td class="py-2.5 px-3 text-center">
+                        <a href="https://wa.me/966${item.phone.replace(/\D/g,'').slice(-9)}" target="_blank" class="text-emerald-700 font-bold hover:underline">${item.phone}</a>
+                    </td>
+                    <td class="py-2.5 px-3 text-center">
+                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.companyName + ' Jeddah')}" target="_blank" class="text-blue-600 font-bold hover:underline">الخرائط</a>
+                    </td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        function filterByJeddahSector(sectorName) {
+            renderJeddahTable(sectorName);
+        }
+
+        // Render CRM Interactions Table
+        function renderInteractionsTable() {
+            const body = document.getElementById('interactionsTableBody');
+            body.innerHTML = '';
+
+            interactions.forEach(log => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 border-b border-slate-100';
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-slate-500 font-mono">${log.date}</td>
+                    <td class="py-3 px-4 font-bold text-slate-900">${log.contactName} <span class="text-xs text-slate-400 font-normal block">${log.company}</span></td>
+                    <td class="py-3 px-4"><span class="bg-slate-100 px-2 py-1 rounded text-xs font-semibold">${log.channel}</span></td>
+                    <td class="py-3 px-4 font-semibold text-indigo-700">${log.result}</td>
+                    <td class="py-3 px-4 text-slate-600">${log.nextStep}</td>
+                    <td class="py-3 px-4 font-bold text-rose-600 font-mono">${log.nextDate}</td>
+                    <td class="py-3 px-4 text-slate-500">${log.agent}</td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        // Dashboard KPI Updater
+        function updateDashboardKPIs() {
+            const total = contacts.length;
+            const jeddahCount = contacts.filter(c => c.city === 'جدة').length;
+            const contractorsCount = contacts.filter(c => c.type === 'مقاول عام' || c.type === 'عميل').length;
+            const suppliersCount = contacts.filter(c => c.type === 'مورد' || c.type === 'مصنع').length;
+            const waCount = contacts.filter(c => c.phone && c.phone.length >= 9).length;
+            const waPercent = total ? Math.round((waCount / total) * 100) : 0;
+
+            document.getElementById('kpi-total-contacts').textContent = total;
+            document.getElementById('kpi-jeddah-contacts').textContent = jeddahCount;
+            document.getElementById('kpi-contractors-count').textContent = contractorsCount;
+            document.getElementById('kpi-suppliers-count').textContent = suppliersCount;
+            document.getElementById('kpi-wa-percentage').textContent = `${waPercent}%`;
+            document.getElementById('kpi-pending-followups').textContent = interactions.length;
+
+            // Health Metrics
+            const completeData = contacts.filter(c => c.phone && c.email && c.city).length;
+            const missingEmail = contacts.filter(c => !c.email).length;
+            const missingPhone = contacts.filter(c => !c.phone).length;
+
+            document.getElementById('health-complete-count').textContent = completeData;
+            document.getElementById('health-missing-email').textContent = missingEmail;
+            document.getElementById('health-missing-phone').textContent = missingPhone;
+
+            // Sector Counts for Jeddah Tab Card Header
+            document.getElementById('sector-count-north').textContent = `${contacts.filter(c => c.sector === 'شمال جدة').length} جهة`;
+            document.getElementById('sector-count-central').textContent = `${contacts.filter(c => c.sector === 'وسط جدة').length} جهة`;
+            document.getElementById('sector-count-south').textContent = `${contacts.filter(c => c.sector === 'جنوب جدة').length} جهة`;
+            document.getElementById('sector-count-east').textContent = `${contacts.filter(c => c.sector === 'شرق جدة').length} جهة`;
+
+            // Activity Breakdown Progress Bars
+            const activityMap = {};
+            contacts.forEach(c => {
+                activityMap[c.activity] = (activityMap[c.activity] || 0) + 1;
+            });
+
+            const activityContainer = document.getElementById('activity-breakdown-list');
+            activityContainer.innerHTML = '';
+
+            Object.entries(activityMap).forEach(([activityName, count]) => {
+                const percentage = Math.round((count / total) * 100);
+                const itemHtml = `
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span class="text-slate-700">${activityName}</span>
+                            <span class="text-indigo-600">${count} (${percentage}%)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2">
+                            <div class="bg-indigo-600 h-2 rounded-full" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+                activityContainer.insertAdjacentHTML('beforeend', itemHtml);
+            });
+
+            // Jeddah District Progress Bars
+            const districtMap = {};
+            contacts.filter(c => c.city === 'جدة').forEach(c => {
+                districtMap[c.district] = (districtMap[c.district] || 0) + 1;
+            });
+
+            const districtContainer = document.getElementById('jeddah-districts-list');
+            districtContainer.innerHTML = '';
+
+            Object.entries(districtMap).forEach(([districtName, count]) => {
+                const pct = Math.round((count / jeddahCount) * 100);
+                const itemHtml = `
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span class="text-slate-700">حي ${districtName}</span>
+                            <span class="text-amber-600">${count} شركة</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2">
+                            <div class="bg-amber-500 h-2 rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+                districtContainer.insertAdjacentHTML('beforeend', itemHtml);
+            });
+        }
+
+        // Modal Handlers
+        function openAddModal() {
+            document.getElementById('contactForm').reset();
+            document.getElementById('modal-contact-id').value = '';
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+
+        function openInteractionModal() {
+            // Placeholder for interaction modal logic or direct feedback
+            const contactName = prompt("أدخل اسم جهة الاتصال للمتابعة:");
+            if (!contactName) return;
+            const result = prompt("أدخل نتيجة التواصل أو الملاحظة:");
+            if (!result) return;
+            
+            interactions.unshift({
+                date: new Date().toISOString().split('T')[0],
+                contactName: contactName,
+                company: "شركة مقاولات",
+                channel: "واتساب / اتصال",
+                result: result,
+                nextStep: "متابعة دورية",
+                nextDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                agent: "حسام السيوفي"
+            });
+            renderInteractionsTable();
+            updateDashboardKPIs();
+            alert("✅ تمت إضافة سجل المتابعة بنجاح!");
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function saveContact(e) {
+            e.preventDefault();
+            const idVal = document.getElementById('modal-contact-id').value;
+
+            const newObj = {
+                id: idVal ? parseInt(idVal) : Date.now(),
+                contactName: document.getElementById('modal-contact-name').value,
+                title: document.getElementById('modal-title').value,
+                companyName: document.getElementById('modal-company').value,
+                type: document.getElementById('modal-type').value,
+                activity: document.getElementById('modal-activity').value,
+                city: document.getElementById('modal-city').value,
+                sector: document.getElementById('modal-sector').value,
+                district: document.getElementById('modal-district').value || 'عام',
+                phone: document.getElementById('modal-phone').value,
+                email: document.getElementById('modal-email').value,
+                status: 'جديد'
+            };
+
+            if (idVal) {
+                const idx = contacts.findIndex(c => c.id === parseInt(idVal));
+                if (idx !== -1) contacts[idx] = newObj;
+            } else {
+                contacts.unshift(newObj);
+            }
+
+            closeModal('contactModal');
+            applyFilters();
+            updateDashboardKPIs();
+        }
+
+        function editContact(id) {
+            const item = contacts.find(c => c.id === id);
+            if (!item) return;
+
+            document.getElementById('modal-contact-id').value = item.id;
+            document.getElementById('modal-contact-name').value = item.contactName;
+            document.getElementById('modal-title').value = item.title;
+            document.getElementById('modal-company').value = item.companyName;
+            document.getElementById('modal-type').value = item.type;
+            document.getElementById('modal-activity').value = item.activity;
+            document.getElementById('modal-city').value = item.city;
+            document.getElementById('modal-sector').value = item.sector;
+            document.getElementById('modal-district').value = item.district;
+            document.getElementById('modal-phone').value = item.phone;
+            document.getElementById('modal-email').value = item.email;
+
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+
+        // Event Listeners for Live Search
+        smartSearchInput.addEventListener('input', applyFilters);
+
+        // Initial Load
+        switchTab('dashboard');
+        renderMaterialsGrid('');
+        applyFilters();
+        updateDashboardKPIs();
+    </script>
+</body>
+</html>
